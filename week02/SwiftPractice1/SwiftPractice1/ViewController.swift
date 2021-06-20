@@ -9,25 +9,37 @@ import UIKit
 
 class ViewController: UIViewController {
 
+
     @IBOutlet weak var imageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
     }
 
     var isBackSide = true
 
-    
-    @IBAction func buttonDidClick(_ sender: Any) {
-        
-        if isBackSide {
-            imageView.image = UIImage(named: "ace")
-        } else {
-            imageView.image = UIImage(named: "poker")
+
+    @IBAction func buttonClicked(_ sender: Any) {
+        UIView.transition(with: imageView, duration: 0.6, options: .transitionFlipFromLeft){
+            
+        } completion: {
+            (Bool) in
         }
         
-        isBackSide = !isBackSide // true | false 를 뒤집어줍니다
+        UIView.transition(with: imageView, duration: 0.6, options: .transitionFlipFromLeft){
+            if self.isBackSide {
+                self.imageView.image = UIImage(named: "ace")
+            } else {
+                self.imageView.image = UIImage(named: "poker")
+            }
+            
+        } completion:{ (animated) in
+            self.isBackSide = !self.isBackSide // true | false 를 뒤집어줍니다
+        }
+        
+    
+        
     }
     
 }
